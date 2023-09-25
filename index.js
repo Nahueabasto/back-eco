@@ -4,6 +4,7 @@ const { conn } = require('./src/db.js');
 const { Pool } = require("pg");
 require('dotenv').config();
 const server = require('./src/app.js');
+const routes = require('./src/routes/index.js');
 
 // Crear un pool de PostgreSQL
 // const pool = new Pool({
@@ -18,6 +19,16 @@ const server = require('./src/app.js');
 //     const result = await pool.query('SELECT NOW()');
 //     res.send(result.rows[0]); // Enviar el resultado de la consulta
 // });
+
+server.use('/', routes);
+
+// Error catching endware.
+server.use((err, req, res, next) => {
+  const status = err.status || 500;
+  const message = err.message || err;
+  console.error(err);
+  res.status(status).send(message);
+});
 
 
 // Sincronizar todos los modelos a la vez (asumiendo que estás usando Sequelize)
