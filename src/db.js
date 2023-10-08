@@ -6,10 +6,27 @@ const {
   DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME,
 } = process.env;
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/eco`, {
-  logging: false, // set to console.log to see the raw SQL queries
-  native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-});
+
+let sequelize =
+  process.env.NODE_ENV === "production"
+    ? new Sequelize(
+        `postgres://eco:tLKoFub6eYwIxpm4pY6NOSoYDYHWJaWs@dpg-ck7jn5g8elhc7388tm3g-a.oregon-postgres.render.com/ecologico`, //eso es lo que da railway en connect Postgres Connection URL
+        {
+          logging: false, // set to console.log to see the raw SQL queries
+          native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+        }
+      )
+    : new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/eco`, {
+         logging: false, // set to console.log to see the raw SQL queries
+         native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+       });
+
+// const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/eco`, {
+//   logging: false, // set to console.log to see the raw SQL queries
+//   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+// });
+
+
 const basename = path.basename(__filename);
 
 const modelDefiners = [];
