@@ -2,8 +2,7 @@ const express = require("express");
 const app = express();
 const { conn } = require('./src/db.js');
 const { Pool } = require("pg");
-require('dotenv').config();
-const server = require('./src/app.js');
+
 
 // Crear un pool de PostgreSQL
 // const pool = new Pool({
@@ -23,13 +22,24 @@ const server = require('./src/app.js');
 
 
 // Sincronizar todos los modelos a la vez (asumiendo que estás usando Sequelize)
-conn.sync({ force: true }).then(() => {
-  // Iniciar el servidor Express.js
-  const port = process.env.PORT || 3001;
-  server.listen(port, () => {
-    console.log(`El servidor está ejecutándose en el puerto ${port}`);
-  });
+// conn.sync({ force: true }).then(() => {
+//   // Iniciar el servidor Express.js
+//   const port = process.env.PORT || 3001;
+//   server.listen(port, () => {
+//     console.log(`El servidor está ejecutándose en el puerto ${port}`);
+//   });
+// });
+
+const server = require('./src/app.js');
+require('dotenv').config();
+
+const port = process.env.PORT || 3001;
+
+server.listen(port, () => {
+  console.log(`port runing in http://localhost:${port}`)
 });
+
+
 
 
 
