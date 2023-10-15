@@ -28,6 +28,13 @@ const {
 const sequelize = new Sequelize(`postgres://eco:X87rFCaCjDCsZNsySiQjXvcwmiDdbCjQ@dpg-cki7h7mafg7c73b9j3c0-a.oregon-postgres.render.com/eco_3rv0`, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+  dialect: 'postgres', // Especifica el dialecto de la base de datos como PostgreSQL
+  dialectOptions: {
+    ssl: {
+      require: true, // Requiere una conexión SSL/TLS
+      rejectUnauthorized: false, // Esto evita el error "self signed certificate" en entornos de desarrollo
+    },
+  },
 });
 
 
