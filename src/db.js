@@ -4,14 +4,14 @@ const fs = require('fs');
 const path = require('path');
 
 const {
-  DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME, DATABASE_URL,
+  DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME,
 } = process.env;
 
 
 // let sequelize =
 //   process.env.NODE_ENV === "production"
 //     ? new Sequelize(
-//       DATABASE_URL, //eso es lo que da railway en connect Postgres Connection URL
+//         `postgres://eco:tLKoFub6eYwIxpm4pY6NOSoYDYHWJaWs@dpg-ck7jn5g8elhc7388tm3g-a.oregon-postgres.render.com/ecologico`, //eso es lo que da railway en connect Postgres Connection URL
 //         {
 //           logging: false, // set to console.log to see the raw SQL queries
 //           native: false, // lets Sequelize know we can use pg-native for ~30% more speed
@@ -25,20 +25,10 @@ const {
 
 //        /////
 
-const sequelize = new Sequelize(process.env.DATABASE_URL, {
-  dialect: 'postgres',
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false // Esta opción permite confiar en certificados auto-firmados
-    }
-  }
+const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`, {
+  logging: false, // set to console.log to see the raw SQL queries
+  native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 });
-
-// const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`, {
-//   logging: false, // set to console.log to see the raw SQL queries
-//   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-// });
 
 
 const basename = path.basename(__filename);
