@@ -25,7 +25,7 @@ const {
 
 //        /////
 
-const sequelize = new Sequelize(`postgres://eco:X87rFCaCjDCsZNsySiQjXvcwmiDdbCjQ@dpg-cki7h7mafg7c73b9j3c0-a.oregon-postgres.render.com/eco_3rv0`, {
+const sequelize = new Sequelize(`postgres://eco:X87rFCaCjDCsZNsySiQjXvcwmiDdbCjQ@dpg-cki7h7mafg7c73b9j3c0-a/eco_3rv0`, {
   dialectOptions: {
     ssl: {
       require: true,
