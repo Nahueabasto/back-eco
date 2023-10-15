@@ -26,9 +26,13 @@ const {
 //        /////
 
 const sequelize = new Sequelize(`postgres://eco:X87rFCaCjDCsZNsySiQjXvcwmiDdbCjQ@dpg-cki7h7mafg7c73b9j3c0-a.oregon-postgres.render.com/eco_3rv0`, {
-  logging: false, // set to console.log to see the raw SQL queries
-  native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-});
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false // Esta opción permite confiar en certificados auto-firmados
+    }
+  }
+})
 
 
 const basename = path.basename(__filename);
