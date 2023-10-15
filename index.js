@@ -5,10 +5,10 @@ const { Pool } = require("pg");
 
 
 // Crear un pool de PostgreSQL
-// const pool = new Pool({
-//   connectionString: process.env.DATABASE_URL,
-//   ssl: true
-// });
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  //ssl: true
+});
 
 //Define tus rutas aquí
 // app.get('/ping', async (req, res) => {
