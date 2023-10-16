@@ -48,7 +48,7 @@ const pool = new Pool({
    ssl: true
 });
 
-server.get('/ping', async (req, res) => {
+server.get('/', async (req, res) => {
   try {
     // Utiliza el pool para ejecutar una consulta en PostgreSQL
     const result = await pool.query('SELECT NOW()');
