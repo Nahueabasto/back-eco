@@ -43,26 +43,26 @@ server.use((req, res, next) => {
 //   }
 // });
 
-// const pool = new Pool({
-//   connectionString: process.env.DATABASE_URL,
-//   ssl: true
-// });
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+   ssl: true
+});
 
-// server.get('/ping', async (req, res) => {
-//   try {
-//     // Utiliza el pool para ejecutar una consulta en PostgreSQL
-//     const result = await pool.query('SELECT NOW()');
+server.get('/ping', async (req, res) => {
+  try {
+    // Utiliza el pool para ejecutar una consulta en PostgreSQL
+    const result = await pool.query('SELECT NOW()');
 
-//     if (result.rows && result.rows.length > 0) {
-//       res.json(result.rows[0]); // Enviar el resultado de la consulta como JSON
-//     } else {
-//       res.status(404).json({ error: 'No se encontraron resultados' });
-//     }
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ error: 'Error al ejecutar la consulta en la base de datos' });
-//   }
-// });
+    if (result.rows && result.rows.length > 0) {
+      res.json(result.rows[0]); // Enviar el resultado de la consulta como JSON
+    } else {
+      res.status(404).json({ error: 'No se encontraron resultados' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error al ejecutar la consulta en la base de datos' });
+  }
+});
 
 
 server.use('/', routes);
