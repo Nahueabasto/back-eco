@@ -9,7 +9,7 @@ const {
 } = process.env;
 
 
-const sequelize = new Sequelize(process.env.POSTGRES_URL, {
+const sequelize = new Sequelize(process.env.POSTGRES_URL_URL, {
   dialect: 'postgres',
   protocol: 'postgres',
   dialectOptions: {
