@@ -2,6 +2,7 @@ require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
+const { Pool } = require("pg");
 
 const {
   DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME,
@@ -25,10 +26,15 @@ const {
 
 //        /////
 // postgres://USER:PASSWORD@INTERNAL_HOST:PORT/DATABASE
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`, {
+const sequelize = new Sequelize(`postgres://default:BFI5jW7KHGmE@ep-delicate-rice-13727789.us-east-1.postgres.vercel-storage.com:5432/verceldb`, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 });
+
+// const pool = new Pool(DATABASE_URL, {
+//   logging: false, // set to console.log to see the raw SQL queries
+//   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+// });
 
 
 const basename = path.basename(__filename);
