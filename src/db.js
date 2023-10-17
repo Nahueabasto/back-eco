@@ -26,11 +26,15 @@ const {
 
 //        /////
 // postgres://USER:PASSWORD@INTERNAL_HOST:PORT/DATABASE
-const sequelize = new Sequelize(`postgres://default:BFI5jW7KHGmE@ep-delicate-rice-13727789.us-east-1.postgres.vercel-storage.com:5432/verceldb`, {
-  logging: false, // set to console.log to see the raw SQL queries
-  native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+const sequelize = new Sequelize(process.env.POSTGRES_URL, {
+  dialect: 'postgres',
+  protocol: 'postgres',
+  dialectOptions: {
+    ssl: {
+      require: true, // Habilita SSL
+    },
+  },
 });
-
 // const pool = new Pool(DATABASE_URL, {
 //   logging: false, // set to console.log to see the raw SQL queries
 //   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
